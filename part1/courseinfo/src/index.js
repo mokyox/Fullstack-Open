@@ -15,7 +15,6 @@ const App = () => {
     return (
       <React.Fragment>
         <h1>{props.course}</h1>
-        {console.log(props)}
       </React.Fragment>
     );
   };
@@ -33,7 +32,6 @@ const App = () => {
   const Content = props => {
     return (
       <React.Fragment>
-        {console.log(props)}
         <Part part={props.part1} exercises={props.exercises1}></Part>
         <Part part={props.part2} exercises={props.exercises2}></Part>
         <Part part={props.part3} exercises={props.exercises3}></Part>
