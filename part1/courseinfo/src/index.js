@@ -3,26 +3,28 @@ import ReactDOM from "react-dom";
 import "./index.css";
 
 const App = () => {
-  const course = "Half Stack application development";
-  const parts = [
-    {
-      name: "Fundamentals of React",
-      exercises: 10
-    },
-    {
-      name: "Using props to pass data",
-      exercises: 7
-    },
-    {
-      name: "State of a component",
-      exercises: 14
-    }
-  ];
+  const course = {
+    name: "Half Stack application development",
+    parts: [
+      {
+        name: "Fundamentals of React",
+        exercises: 10
+      },
+      {
+        name: "Using props to pass data",
+        exercises: 7
+      },
+      {
+        name: "State of a component",
+        exercises: 14
+      }
+    ]
+  };
 
   const Header = props => {
     return (
       <React.Fragment>
-        <h1>{props.course}</h1>
+        <h1>{props.course.name}</h1>
       </React.Fragment>
     );
   };
@@ -62,8 +64,8 @@ const App = () => {
   return (
     <React.Fragment>
       <Header course={course}></Header>
-      <Content parts={parts}></Content>
-      <Total parts={parts}></Total>
+      <Content parts={course.parts}></Content>
+      <Total parts={course.parts}></Total>
     </React.Fragment>
   );
 };
