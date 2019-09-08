@@ -18,6 +18,13 @@ const Button = props => {
 
 //Display stats in stats section
 const Statistics = ({ good, neutral, bad, average, positive }) => {
+  if (!good && !neutral && !bad) {
+    return (
+      <React.Fragment>
+        <p>No feedback given.</p>
+      </React.Fragment>
+    );
+  }
   return (
     <React.Fragment>
       <h2> Stats</h2>
