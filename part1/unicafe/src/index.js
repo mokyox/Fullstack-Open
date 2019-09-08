@@ -16,9 +16,19 @@ const Button = props => {
   );
 };
 
-//Display stats in stats section
-const Statistics = ({ good, neutral, bad, average, positive }) => {
-  if (!good && !neutral && !bad) {
+const Statistic = props => {
+  const { category, value } = props;
+  return (
+    <React.Fragment>
+      <td>{category}</td>
+      <td>{value}</td>
+    </React.Fragment>
+  );
+};
+
+// Display stats in stats section
+const Statistics = ({ allData, good, neutral, bad, average, positive }) => {
+  if (allData === 0) {
     return (
       <React.Fragment>
         <p>No feedback given.</p>
@@ -26,15 +36,28 @@ const Statistics = ({ good, neutral, bad, average, positive }) => {
     );
   }
   return (
-    <React.Fragment>
-      <h2> Stats</h2>
-      <p>good: {good}</p>
-      <p>neutral: {neutral}</p>
-      <p>bad: {bad}</p>
-      <p>total: {good + neutral + bad}</p>
-      <p>average: {average}</p>
-      <p>positive: {positive}%</p>
-    </React.Fragment>
+    <table>
+      <tbody>
+        <tr>
+          <Statistic category="good" value={good}></Statistic>
+        </tr>
+        <tr>
+          <Statistic category="neutral" value={neutral}></Statistic>
+        </tr>
+        <tr>
+          <Statistic category="bad" value={bad}></Statistic>
+        </tr>
+        <tr>
+          <Statistic category="total" value={allData}></Statistic>
+        </tr>
+        <tr>
+          <Statistic category="average" value={average}></Statistic>
+        </tr>
+        <tr>
+          <Statistic category="positive" value={positive}></Statistic>
+        </tr>
+      </tbody>
+    </table>
   );
 };
 
@@ -69,12 +92,14 @@ const App = () => {
       <Button category="good" value={good} onClick={incrementByOneGood}></Button>
       <Button category="neutral" value={neutral} onClick={incrementByOneNeutral}></Button>
       <Button category="bad" value={bad} onClick={incrementByOneBad}></Button>
+      <h2>Stats</h2>
       <Statistics
+        allData={allData}
         good={good}
         neutral={neutral}
         bad={bad}
-        average={average}
         positive={positive}
+        average={average}
       ></Statistics>
     </React.Fragment>
   );
