@@ -23,8 +23,8 @@ const App = () => {
   const [good, setGood] = useState(0);
   const [neutral, setNeutral] = useState(0);
   const [bad, setBad] = useState(0);
-
   //Increment each button by one event handler
+
   const incrementByOneGood = props => {
     setGood(good + 1);
   };
@@ -36,6 +36,12 @@ const App = () => {
     return setBad(bad + 1);
   };
 
+  //Get average data
+  const allData = good + neutral + bad;
+  const average = (good * 1 + neutral * 0 + bad * -1) / allData;
+  console.log(average);
+  const positive = (good / allData) * 100;
+
   return (
     <React.Fragment>
       <Title></Title>
@@ -46,6 +52,9 @@ const App = () => {
       <p>good: {good}</p>
       <p>neutral: {neutral}</p>
       <p>bad: {bad}</p>
+      <p>total: {good + neutral + bad}</p>
+      <p>average: {average}</p>
+      <p>positive: {positive}%</p>
     </React.Fragment>
   );
 };
