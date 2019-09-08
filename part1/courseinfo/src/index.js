@@ -1,8 +1,9 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
+import App from "./practice";
 
-const App = () => {
+const OldApp = () => {
   const course = {
     name: "Half Stack application development",
     parts: [
