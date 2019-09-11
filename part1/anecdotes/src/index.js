@@ -17,11 +17,43 @@ const Button = props => {
   return <button onClick={props.onClick}>{props.text}</button>;
 };
 
+const Anecdote = ({ votes, anecdotes, selected }) => {
+  return (
+    <React.Fragment>
+      <h1>Anecdote of the day</h1>
+      <p>{selected}</p>
+      <p>Has {votes[anecdotes.indexOf(selected)]} votes</p>
+    </React.Fragment>
+  );
+};
+
+const TopAnecdote = ({ votes, anecdotes }) => {
+  //Iterate over votes array and return index that has largest number of votes
+  const topVotedAnecdoteScore = Math.max(...votes);
+  const topVotedAnecdoteIndex = votes.indexOf(topVotedAnecdoteScore);
+  return (
+    <React.Fragment>
+      <h1>Anecdote with most votes</h1>
+      <p>{anecdotes[topVotedAnecdoteIndex]}</p>
+      <p>Has {topVotedAnecdoteScore} votes.</p>
+    </React.Fragment>
+  );
+};
+
 const App = props => {
   const [selected, setSelected] = useState(anecdotes[0]);
+  const [votes, setVotes] = useState(Array(anecdotes.length).fill(0));
+  console.log(votes);
+
+  //Event listener for updating vote
+  const updateVotes = () => {
+    //Copy previous score, update element of array that was voted on
+    const score = [...votes];
+    score[anecdotes.indexOf(selected)] += 1;
+    return setVotes(score);
+  };
 
   //Event listener for selecting next anecdote
-
   const setNextAnecdote = () => {
     //Use setSelected to modify state (selected) and return a new anecdote on click
     return setSelected(anecdotes[Math.floor(Math.random() * anecdotes.length)]);
@@ -29,9 +61,10 @@ const App = props => {
 
   return (
     <React.Fragment>
-      <h1>Anecdotes</h1>
-      <p>{selected}</p>
+      <Anecdote votes={votes} anecdotes={anecdotes} selected={selected}></Anecdote>
+      <Button onClick={updateVotes} text="vote"></Button>
       <Button onClick={setNextAnecdote} text="next anecdote"></Button>
+      <TopAnecdote votes={votes} anecdotes={anecdotes}></TopAnecdote>
     </React.Fragment>
   );
 };
