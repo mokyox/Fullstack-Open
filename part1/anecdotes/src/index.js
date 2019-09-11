@@ -54,7 +54,7 @@ const App = props => {
   };
 
   //Event listener for selecting next anecdote
-  const setNextAnecdote = () => {
+  const getNextAnecdote = () => {
     //Use setSelected to modify state (selected) and return a new anecdote on click
     return setSelected(anecdotes[Math.floor(Math.random() * anecdotes.length)]);
   };
@@ -63,7 +63,7 @@ const App = props => {
     <React.Fragment>
       <Anecdote votes={votes} anecdotes={anecdotes} selected={selected}></Anecdote>
       <Button onClick={updateVotes} text="vote"></Button>
-      <Button onClick={setNextAnecdote} text="next anecdote"></Button>
+      <Button onClick={getNextAnecdote} text="next anecdote"></Button>
       <TopAnecdote votes={votes} anecdotes={anecdotes}></TopAnecdote>
     </React.Fragment>
   );
