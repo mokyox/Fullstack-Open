@@ -69,14 +69,14 @@ const App = () => {
 
   //Increment each button by one event handler
 
-  const incrementByOneGood = props => {
+  const incrementByOneGood = () => {
     setGood(good + 1);
   };
 
-  const incrementByOneNeutral = props => {
+  const incrementByOneNeutral = () => {
     return setNeutral(neutral + 1);
   };
-  const incrementByOneBad = props => {
+  const incrementByOneBad = () => {
     return setBad(bad + 1);
   };
 
