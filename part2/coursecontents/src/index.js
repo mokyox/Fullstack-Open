@@ -7,6 +7,7 @@ const Course = ({ course }) => {
     <React.Fragment>
       <Header name={course.name}></Header>
       <Content parts={course.parts}></Content>
+      <Total parts={course.parts}></Total>
     </React.Fragment>
   );
 };
@@ -40,16 +41,16 @@ const Content = ({ parts }) => {
   );
 };
 
-// const Total = props => {
-//   return (
-//     <React.Fragment>
-//       <p>
-//         Number of exercises{" "}
-//         {props.parts[0].exercises + props.parts[1].exercises + props.parts[2].exercises}
-//       </p>
-//     </React.Fragment>
-//   );
-// };
+const Total = ({ parts }) => {
+  //2.3 calculate sum of exercises with reduce
+  //Include initial value for reduce to show that result is a number
+  const total = parts.reduce((sum, { exercises }) => sum + exercises, 0);
+  return (
+    <React.Fragment>
+      <h4>Total of {total} exercises</h4>
+    </React.Fragment>
+  );
+};
 
 const App = () => {
   const course = {
@@ -69,6 +70,11 @@ const App = () => {
         name: "State of a component",
         exercises: 14,
         id: 3
+      },
+      {
+        name: "Redux",
+        exercises: 11,
+        id: 4
       }
     ]
   };
