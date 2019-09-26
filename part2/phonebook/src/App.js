@@ -10,6 +10,7 @@ const App = () => {
   ]);
   const [newName, setNewName] = useState("");
   const [newNumber, setNewNumber] = useState("");
+  const [searchPersons, setSearchPersons] = useState("");
 
   const addPerson = event => {
     //Add person on form submission
@@ -33,10 +34,27 @@ const App = () => {
   const handleNumberChange = event => {
     setNewNumber(event.target.value);
   };
+  // Set searchbox value on event change
+  const handleSearchChange = event => {
+    setSearchPersons(event.target.value);
+  };
+
+  const personsFilter =
+    searchPersons === ""
+      ? persons
+      : persons.filter(
+          person => person.name.toLowerCase().indexOf(searchPersons.toLowerCase()) !== -1
+        );
+
+  console.log(personsFilter);
 
   return (
-    <div>
+    <>
       <h2>Phonebook</h2>
+      <div>
+        Filter shown with <input value={searchPersons} onChange={handleSearchChange}></input>
+      </div>
+      <h3> Add a new...</h3>
       <form onSubmit={addPerson}>
         <div>
           name: <input value={newName} onChange={handleNameChange} />
@@ -50,12 +68,12 @@ const App = () => {
       </form>
       <h2>Numbers</h2>
       {/* Map over array of objects and display name */}
-      {persons.map(person => (
+      {personsFilter.map(person => (
         <p key={person.name}>
           {person.name} {person.number}
         </p>
       ))}
-    </div>
+    </>
   );
 };
 
