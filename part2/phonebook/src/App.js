@@ -1,5 +1,8 @@
 import React, { useState } from "react";
 import "./App.css";
+import Filter from "./components/Filter";
+import PersonForm from "./components/PersonForm";
+import Persons from "./components/Persons";
 
 const App = () => {
   const [persons, setPersons] = useState([
@@ -39,40 +42,20 @@ const App = () => {
     setSearchPersons(event.target.value);
   };
 
-  const personsFilter =
-    searchPersons === ""
-      ? persons
-      : persons.filter(
-          person => person.name.toLowerCase().indexOf(searchPersons.toLowerCase()) !== -1
-        );
-
-  console.log(personsFilter);
-
   return (
     <>
       <h2>Phonebook</h2>
-      <div>
-        Filter shown with <input value={searchPersons} onChange={handleSearchChange}></input>
-      </div>
+      <Filter value={searchPersons} onChange={handleSearchChange}></Filter>
       <h3> Add a new...</h3>
-      <form onSubmit={addPerson}>
-        <div>
-          name: <input value={newName} onChange={handleNameChange} />
-        </div>
-        <div>
-          number: <input value={newNumber} onChange={handleNumberChange} type="number" />
-        </div>
-        <div>
-          <button type="submit">add</button>
-        </div>
-      </form>
+      <PersonForm
+        onSubmit={addPerson}
+        newName={newName}
+        onNameChange={handleNameChange}
+        newNumber={newNumber}
+        onNumberChange={handleNumberChange}
+      ></PersonForm>
       <h2>Numbers</h2>
-      {/* Map over array of objects and display name */}
-      {personsFilter.map(person => (
-        <p key={person.name}>
-          {person.name} {person.number}
-        </p>
-      ))}
+      <Persons persons={persons} searchPersons={searchPersons}></Persons>
     </>
   );
 };
