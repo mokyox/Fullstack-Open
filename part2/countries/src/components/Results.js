@@ -10,20 +10,26 @@ const Results = ({ countries, searchCountry }) => {
         );
   console.log(filteredCountries);
 
-  if (filteredCountries.length === 1) {
+  const showCountries = () => {
     return (
       <>
         <h1>{filteredCountries[0].name}</h1>
-        <p>Population: {filteredCountries[0].population}</p>
+        <p>Population: {new Intl.NumberFormat().format(filteredCountries[0].population)}</p>
         <h3>Languages</h3>
         <ul>
           {filteredCountries[0].languages.map(language => (
-            <li key={language.name}>{language.name}</li>
+            <React.Fragment key={language.name}>
+              <li key={language.name}>{language.name}</li>
+            </React.Fragment>
           ))}
         </ul>
         <img src={filteredCountries[0].flag} alt="flag"></img>
       </>
     );
+  };
+
+  if (filteredCountries.length === 1) {
+    return showCountries();
   }
 
   if (filteredCountries.length > 10) {
@@ -34,7 +40,16 @@ const Results = ({ countries, searchCountry }) => {
     <>
       <ul>
         {filteredCountries.map(country => (
-          <li key={country.name}>{country.name}</li>
+          <React.Fragment key={country.name}>
+            <li>{country.name}</li>{" "}
+            <button
+              onClick={() => {
+                console.log(showCountries());
+              }}
+            >
+              Show
+            </button>
+          </React.Fragment>
         ))}
       </ul>
     </>
