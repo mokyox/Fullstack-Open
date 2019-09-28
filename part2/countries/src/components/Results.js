@@ -10,29 +10,30 @@ const Results = ({ countries, searchCountry }) => {
         );
   console.log(filteredCountries);
 
-  const showCountries = () => {
+  //Display stats for a country
+  const showCountries = country => {
     return (
       <>
-        <h1>{filteredCountries[0].name}</h1>
-        <p>Population: {new Intl.NumberFormat().format(filteredCountries[0].population)}</p>
+        <h1>{country.name}</h1>
+        <p>Population: {new Intl.NumberFormat().format(country.population)}</p>
         <h3>Languages</h3>
         <ul>
-          {filteredCountries[0].languages.map(language => (
+          {country.languages.map(language => (
             <React.Fragment key={language.name}>
               <li key={language.name}>{language.name}</li>
             </React.Fragment>
           ))}
         </ul>
-        <img src={filteredCountries[0].flag} alt="flag"></img>
+        <img src={country.flag} alt="flag"></img>
       </>
     );
   };
 
   if (filteredCountries.length === 1) {
-    return showCountries();
+    return showCountries(filteredCountries[0]);
   }
 
-  if (filteredCountries.length > 10) {
+  if (filteredCountries.length > 20) {
     return <p>Too many matches, please specify another filter.</p>;
   }
 
@@ -41,10 +42,10 @@ const Results = ({ countries, searchCountry }) => {
       <ul>
         {filteredCountries.map(country => (
           <React.Fragment key={country.name}>
-            <li>{country.name}</li>{" "}
+            <li>{country.name}</li>
             <button
               onClick={() => {
-                console.log(showCountries());
+                console.log("clicked");
               }}
             >
               Show

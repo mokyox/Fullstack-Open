@@ -23,7 +23,7 @@ const App = () => {
       <header className="App-header">
         <h1>Country Search</h1>
         <form>
-          Find Countries <input value={searchCountry} onChange={handleCountryChange}></input>
+          Search <input value={searchCountry} onChange={handleCountryChange}></input>
         </form>
         <section className="results">
           <Results countries={countries} searchCountry={searchCountry}></Results>
