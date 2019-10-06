@@ -2,10 +2,6 @@
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-}
-
 .App-header {
   background-color: #282c34;
   min-height: 100vh;
@@ -33,7 +29,12 @@ ul {
   align-items: center;
   justify-content: flex-start;
   flex-wrap: wrap;
-  width: 70%;
+  width: 80%;
+}
+
+ul,
+li {
+  margin-left: 0;
 }
 
 input {
@@ -41,12 +42,12 @@ input {
 }
 
 li {
-  font-size: 1.5rem;
+  font-size: calc(10px + 1.5vmin);
   margin: 1px;
   padding: 5px;
   flex: 1 0 50%;
 }
 
 img {
-  max-width: 360px;
+  max-width: 240px;
 }
