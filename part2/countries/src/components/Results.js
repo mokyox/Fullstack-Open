@@ -1,15 +1,9 @@
 import React from "react";
-import CountryStats from "./CountryStats";
 
 const Results = ({ filteredCountries }) => {
-  if (filteredCountries.length === 1) {
-    return <CountryStats country={filteredCountries}></CountryStats>;
-  }
-
   if (filteredCountries.length > 20) {
     return <p>Too many matches, please specify another filter.</p>;
   }
-
   return (
     <>
       <ul>

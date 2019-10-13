@@ -2,12 +2,13 @@ import React, { useState, useEffect } from "react";
 import "./App.css";
 import axios from "axios";
 import Results from "./components/Results";
+import CountryStats from "./components/CountryStats";
 
 const App = () => {
   const [countries, setCountries] = useState([]);
   const [searchCountry, setSearchCountry] = useState("");
 
-  //Filter through all the countries, based on text from input
+  //Filter through all the countries based on text from input
   const filteredCountries =
     searchCountry === ""
       ? countries
@@ -25,7 +26,7 @@ const App = () => {
 
   //Log values of country every time input value changes
   const handleCountryChange = event => {
-    // setSelctedCountry([]) Add state that keeps track which country is selected
+    // IDEA: setSelectedCountry([]) Add state that keeps track which country is selected
     setSearchCountry(event.target.value);
     console.log(event.target.value);
   };
@@ -39,7 +40,12 @@ const App = () => {
         </form>
         <section className="results">
           <Results filteredCountries={filteredCountries}></Results>
-          {/* {selectedCountry.length ? (
+          {filteredCountries.length === 1 ? (
+            <CountryStats country={filteredCountries}></CountryStats>
+          ) : (
+            ""
+          )}
+          {/* IDEA {selectedCountry.length ? (
             <Results countries={countries} searchCountry={searchCountry}></Results>
           ) : (
             <SelectedCountry data={selectedCountry} />

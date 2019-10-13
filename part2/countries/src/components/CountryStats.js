@@ -2,7 +2,7 @@ import React from "react";
 
 const CountryStats = ({ country }) => {
   //Display stats for a country
-  console.log(country, "country");
+  console.log(country[0], "country");
   return (
     <>
       <h1>{country[0].name}</h1>
