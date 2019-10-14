@@ -29,7 +29,7 @@ ul {
   align-items: center;
   justify-content: flex-start;
   flex-wrap: wrap;
-  width: 80%;
+  width: 50%;
 }
 
 ul,
@@ -43,8 +43,8 @@ input {
 
 li {
   font-size: calc(10px + 1.5vmin);
-  margin: 1px;
-  padding: 5px;
+  margin: 1px 1px 1px 0;
+  padding: 5px 0px;
   flex: 1 0 50%;
 }
 
