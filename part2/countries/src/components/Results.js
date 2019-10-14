@@ -23,6 +23,7 @@ const Results = ({ filteredCountries }) => {
             {selectedCountry === country.name && isClicked ? "Hide" : "Show"}
           </button>
           {selectedCountry === country.name ? <CountryStats country={country}></CountryStats> : ""}
+          {/*TODO: Move <CountryStats></CountryStats> outside of the <li></li> so it doesn't render between them*/}
         </React.Fragment>
       ))}
     </ul>
