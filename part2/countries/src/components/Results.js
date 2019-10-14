@@ -5,6 +5,7 @@ import PropTypes from "prop-types";
 const Results = ({ filteredCountries }) => {
   const [selectedCountry, setSelectedCountry] = useState("");
   const [isClicked, setIsClicked] = useState(false);
+  console.log(selectedCountry, "is the selectedCountry");
   if (filteredCountries.length > 20) {
     return <p>Too many matches, please specify another filter.</p>;
   }
@@ -19,13 +20,9 @@ const Results = ({ filteredCountries }) => {
               setIsClicked(!isClicked);
             }}
           >
-            {isClicked === true ? "Hide" : "Show"}
+            {selectedCountry === country.name && isClicked ? "Hide" : "Show"}
           </button>
-          {selectedCountry === country.name && isClicked === true ? (
-            <CountryStats country={country}></CountryStats>
-          ) : (
-            ""
-          )}
+          {selectedCountry === country.name ? <CountryStats country={country}></CountryStats> : ""}
         </React.Fragment>
       ))}
     </ul>
