@@ -19,7 +19,7 @@ const Results = ({ filteredCountries }) => {
               setIsClicked(!isClicked);
             }}
           >
-            {isClicked && selectedCountry === country.name ? "Hide" : "Show"}
+            {isClicked === true ? "Hide" : "Show"}
           </button>
           {selectedCountry === country.name && isClicked === true ? (
             <CountryStats country={country}></CountryStats>
