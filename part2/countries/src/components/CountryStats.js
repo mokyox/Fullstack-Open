@@ -1,8 +1,8 @@
 import React from "react";
+import PropTypes from "prop-types";
 
 const CountryStats = ({ country }) => {
   //Display stats for a country
-  console.log(country, "country");
   return (
     <div>
       <h1>{country.name}</h1>
@@ -16,6 +16,10 @@ const CountryStats = ({ country }) => {
       <img src={country.flag} alt="flag"></img>
     </div>
   );
+};
+
+CountryStats.propTypes = {
+  country: PropTypes.object
 };
 
 export default CountryStats;

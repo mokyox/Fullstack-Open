@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import CountryStats from "./CountryStats";
+import PropTypes from "prop-types";
 
 const Results = ({ filteredCountries }) => {
   const [selectedCountry, setSelectedCountry] = useState("");
@@ -20,10 +21,18 @@ const Results = ({ filteredCountries }) => {
           >
             {isClicked && selectedCountry === country.name ? "Hide" : "Show"}
           </button>
-          {selectedCountry === country.name ? <CountryStats country={country}></CountryStats> : ""}
+          {selectedCountry === country.name && isClicked ? (
+            <CountryStats country={country}></CountryStats>
+          ) : (
+            ""
+          )}
         </React.Fragment>
       ))}
     </ul>
   );
+};
+
+Results.propTypes = {
+  filteredCountries: PropTypes.array
 };
 export default Results;
