@@ -6,7 +6,7 @@ const Results = ({ filteredCountries }) => {
   const [selectedCountry, setSelectedCountry] = useState("");
   const [isClicked, setIsClicked] = useState(false);
   console.log(selectedCountry, "is the selectedCountry");
-  if (filteredCountries.length > 20) {
+  if (filteredCountries.length > 10) {
     return <p>Too many matches, please specify another filter.</p>;
   }
   return (
@@ -16,16 +16,17 @@ const Results = ({ filteredCountries }) => {
           <li>{country.name}</li>
           <button
             onClick={() => {
-              setSelectedCountry(country.name);
+              setSelectedCountry(country);
               setIsClicked(!isClicked);
             }}
           >
-            {selectedCountry === country.name && isClicked ? "Hide" : "Show"}
+            {selectedCountry.name === country.name && isClicked ? "Showing" : "Show"}
           </button>
-          {selectedCountry === country.name ? <CountryStats country={country}></CountryStats> : ""}
+
           {/*TODO: Move <CountryStats></CountryStats> outside of the <li></li> so it doesn't render between them*/}
         </React.Fragment>
       ))}
+      {selectedCountry ? <CountryStats country={selectedCountry}></CountryStats> : ""}
     </ul>
   );
 };

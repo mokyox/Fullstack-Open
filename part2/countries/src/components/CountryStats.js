@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 const CountryStats = ({ country }) => {
   //Display stats for a country
   return (
-    <div>
+    <div style={{ display: "flex", flexDirection: "column" }}>
       <h1>{country.name}</h1>
       <p>Population: {new Intl.NumberFormat().format(country.population)}</p>
       <h3>Languages</h3>
