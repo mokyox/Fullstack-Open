@@ -24,17 +24,8 @@ input {
 
 ul {
   list-style-type: none;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: flex-start;
-  flex-wrap: wrap;
-  width: 50%;
-}
-
-ul,
-li {
-  margin-left: 0;
+  margin: 0;
+  padding: 0;
 }
 
 input {
@@ -43,11 +34,12 @@ input {
 
 li {
   font-size: calc(10px + 1.5vmin);
-  margin: 1px 1px 1px 0;
   padding: 5px 0px;
-  flex: 1 0 50%;
+  flex: 1 0 10%;
 }
 
 img {
-  max-width: 240px;
+  width: 100%;
+  max-width: 360px;
+  height: auto;
 }
