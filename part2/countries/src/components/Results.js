@@ -3,12 +3,16 @@ import CountryStats from "./CountryStats";
 import PropTypes from "prop-types";
 import styled from "styled-components";
 
-const Results = ({ filteredCountries }) => {
-  const [selectedCountry, setSelectedCountry] = useState("");
+const Results = ({ filteredCountries, isLoaded, setSelectedCountry, selectedCountry }) => {
   const [isClicked, setIsClicked] = useState(false);
-  console.log(selectedCountry, "is the selectedCountry");
+
+  //Get API weather data after country API data from parent component is called
+
   if (filteredCountries.length > 10) {
-    return <p>Too many matches, please specify another filter.</p>;
+    return <p> Please specify filter further.</p>;
+  }
+  if (filteredCountries.length === 0 && isLoaded) {
+    return <p>No countries found.</p>;
   }
   return (
     <>
@@ -31,15 +35,26 @@ const Results = ({ filteredCountries }) => {
           ))}
         </ul>
       </StyledResults>
-      {selectedCountry ? <CountryStats country={selectedCountry}></CountryStats> : ""}
+      {selectedCountry ? (
+        <CountryStats
+          country={selectedCountry}
+          selectedCountry={selectedCountry}
+          setSelectedCountry={setSelectedCountry}
+          isLoaded={isLoaded}
+        ></CountryStats>
+      ) : (
+        ""
+      )}
     </>
   );
 };
 
 const StyledResults = styled.div`
-  /* border: solid 1px green; */
+  /* border: solid 3px green; */
+  margin: 1rem auto;
+  max-width: 640px;
   text-align: center;
-  margin: 5px 0;
+  padding: 1rem;
 `;
 
 const StyledResult = styled.div`
@@ -47,18 +62,19 @@ const StyledResult = styled.div`
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  flex-wrap: nowrap;
 `;
 
 const StyledButton = styled.button`
-  background: ${props => (props.primary ? "#25d366" : "#e76c67")};
-  border: ${props => (props.primary ? "1px solid #25d366" : "1px solid #e76c67")};
+  background: #ac5610;
+  border: 1px solid #ac5610;
   color: white;
   padding: 0.3rem 0.5rem;
   border-radius: 5px;
   text-decoration: none;
   font-weight: 700;
   transition: all 0.1s ease-in-out;
+  margin: 5px 1rem;
+  cursor: pointer;
   &:hover {
     transform: scale(1.1);
   }

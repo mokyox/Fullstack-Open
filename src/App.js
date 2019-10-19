@@ -44,10 +44,14 @@ const App = () => {
         <h1>Countripedia</h1>
         <form>
           <StyledLabel>Search Countries</StyledLabel>
+<<<<<<< HEAD
           <StyledInput
             value={searchCountry}
             onChange={handleCountryChange}
           ></StyledInput>
+=======
+          <StyledInput value={searchCountry} onChange={handleCountryChange}></StyledInput>
+>>>>>>> 3bfb706... refactor design to improve mobile look
         </form>
         <section className='results'>
           {filteredCountries.length === 1 ? (
@@ -79,8 +83,13 @@ const StyledInput = styled.input`
   position: relative;
   border-radius: 1000rem;
   padding: 5px;
+<<<<<<< HEAD
   margin: 0.75rem auto;
   max-width: 360px;
+=======
+  margin: 0.1rem 0.5rem;
+  max-width: 250px;
+>>>>>>> 3bfb706... refactor design to improve mobile look
 `;
 
 export default App;
