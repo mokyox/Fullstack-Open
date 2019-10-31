@@ -22,14 +22,17 @@ const App = () => {
   const addPerson = event => {
     //Add person on form submission
     event.preventDefault();
-    console.log("Form submitted", event.target);
+
     const personObject = { name: newName, number: newNumber };
     //Check if name already exists
+
     persons.some(person => person.name === newName)
       ? alert(`Sorry, ${newName} already exists.`)
-      : setPersons(persons.concat(personObject));
-    setNewName("");
-    setNewNumber("");
+      : axios.post("http://localhost:3001/persons", personObject).then(response => {
+          setPersons(persons.concat(response.data));
+          setNewName("");
+          setNewNumber("");
+        });
   };
 
   //Log the value of newName every time input value changes
