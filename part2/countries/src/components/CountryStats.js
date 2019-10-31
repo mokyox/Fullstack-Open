@@ -2,19 +2,19 @@ import React from "react";
 
 const CountryStats = ({ country }) => {
   //Display stats for a country
-  console.log(country[0], "country");
+  console.log(country, "country");
   return (
-    <>
-      <h1>{country[0].name}</h1>
-      <p>Population: {new Intl.NumberFormat().format(country[0].population)}</p>
+    <div>
+      <h1>{country.name}</h1>
+      <p>Population: {new Intl.NumberFormat().format(country.population)}</p>
       <h3>Languages</h3>
       <ul>
-        {country[0].languages.map(language => (
+        {country.languages.map(language => (
           <li key={language.name}>{language.name}</li>
         ))}
       </ul>
-      <img src={country[0].flag} alt="flag"></img>
-    </>
+      <img src={country.flag} alt="flag"></img>
+    </div>
   );
 };
 
