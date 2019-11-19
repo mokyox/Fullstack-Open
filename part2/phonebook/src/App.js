@@ -3,7 +3,7 @@ import "./App.css";
 import Filter from "./components/Filter";
 import PersonForm from "./components/PersonForm";
 import Persons from "./components/Persons";
-import axios from "axios";
+import phonebook from "./services/phonebook";
 
 const App = () => {
   const [persons, setPersons] = useState([]);
@@ -13,9 +13,9 @@ const App = () => {
 
   //Get persons from server
   useEffect(() => {
-    axios.get("http://localhost:3001/persons").then(response => {
+    phonebook.getAll().then(initialData => {
       console.log("promise resolved");
-      setPersons(response.data);
+      setPersons(initialData);
     });
   }, []);
 
@@ -28,8 +28,8 @@ const App = () => {
 
     persons.some(person => person.name === newName)
       ? alert(`Sorry, ${newName} already exists.`)
-      : axios.post("http://localhost:3001/persons", personObject).then(response => {
-          setPersons(persons.concat(response.data));
+      : phonebook.create(personObject).then(returnedContact => {
+          setPersons(persons.concat(returnedContact));
           setNewName("");
           setNewNumber("");
         });
