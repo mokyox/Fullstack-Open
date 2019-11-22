@@ -23,16 +23,49 @@ const App = () => {
     //Add person on form submission
     event.preventDefault();
 
-    const personObject = { name: newName, number: newNumber };
-    //Check if name already exists
+    const personObject = {
+      name: newName,
+      number: newNumber,
+      id: persons.length + 1
+    };
 
-    persons.some(person => person.name === newName)
-      ? alert(`Sorry, ${newName} already exists.`)
-      : phonebook.create(personObject).then(returnedContact => {
-          setPersons(persons.concat(returnedContact));
-          setNewName("");
-          setNewNumber("");
-        });
+    //Check if user already exists
+    if (
+      persons.some(
+        person => person.name.toLowerCase() === newName.toLowerCase()
+      )
+    ) {
+      //Confirm if we want to replace the old number with a put request
+
+      if (
+        window.confirm(
+          `${personObject.name} is already added to the phone, replace the old number with a new one?`
+        )
+      ) {
+        const existingContact = persons.find(
+          person => person.name === personObject.name
+        );
+        const updatedContact = {
+          ...existingContact,
+          number: personObject.number
+        };
+        phonebook
+          .update(updatedContact, updatedContact.id)
+          .then(updatedContact => {
+            setPersons(
+              persons.map(person =>
+                person.id !== updatedContact.id ? person : updatedContact
+              )
+            );
+          });
+      }
+    } else {
+      phonebook.create(personObject).then(returnedContact => {
+        setPersons(persons.concat(returnedContact));
+        setNewName("");
+        setNewNumber("");
+      });
+    }
   };
 
   //Log the value of newName every time input value changes
