@@ -57,6 +57,14 @@ const App = () => {
                 person.id !== updatedContact.id ? person : updatedContact
               )
             );
+          })
+          .catch(error => {
+            alert(
+              `Contact ${existingContact.name}  was already removed from the server`
+            );
+            setPersons(
+              persons.filter(person => person.id !== updatedContact.id)
+            );
           });
       }
     } else {
@@ -65,6 +73,13 @@ const App = () => {
         setNewName("");
         setNewNumber("");
       });
+    }
+  };
+
+  const deleteUser = (id, person) => {
+    if (window.confirm(`Delete ${person}?`)) {
+      phonebook.removeUser(id);
+      setPersons(persons.filter(person => person.id !== id));
     }
   };
 
@@ -95,7 +110,11 @@ const App = () => {
         onNumberChange={handleNumberChange}
       ></PersonForm>
       <h2>Numbers</h2>
-      <Persons persons={persons} searchPersons={searchPersons}></Persons>
+      <Persons
+        persons={persons}
+        searchPersons={searchPersons}
+        deleteUser={deleteUser}
+      ></Persons>
     </>
   );
 };

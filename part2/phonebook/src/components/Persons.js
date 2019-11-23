@@ -1,7 +1,6 @@
 import React from "react";
-import axios from "axios";
 
-const Persons = ({ persons, searchPersons }) => {
+const Persons = ({ persons, searchPersons, deleteUser }) => {
   /* Map over array of objects and display name */
   const personsFilter =
     searchPersons === ""
@@ -18,13 +17,6 @@ const Persons = ({ persons, searchPersons }) => {
   //Use the axios.delete() method onClick
   // Remove the user depending on the id of the person.id
 
-  const removeUser = (id, person) => {
-    if (window.confirm(`Delete ${person}?`)) {
-      axios.delete(`http://localhost:3001/persons/${id}`);
-      console.log("Deleted.");
-    }
-  };
-
   return (
     <>
       {personsFilter.map(person => (
@@ -32,7 +24,7 @@ const Persons = ({ persons, searchPersons }) => {
           {person.name} {person.number}
           <button
             onClick={() => {
-              removeUser(person.id, person.name);
+              deleteUser(person.id, person.name);
             }}
           >
             Delete
