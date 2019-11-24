@@ -4,12 +4,15 @@ import Filter from "./components/Filter";
 import PersonForm from "./components/PersonForm";
 import Persons from "./components/Persons";
 import phonebook from "./services/phonebook";
+import Notification from "./components/Notification";
 
 const App = () => {
   const [persons, setPersons] = useState([]);
   const [newName, setNewName] = useState("");
   const [newNumber, setNewNumber] = useState("");
   const [searchPersons, setSearchPersons] = useState("");
+  const [isNotificationVisible, setIsNotificationVisible] = useState(false);
+  const [notificationMessage, setNotificationMessage] = useState("");
 
   //Get persons from server
   useEffect(() => {
@@ -20,13 +23,12 @@ const App = () => {
   }, []);
 
   const addPerson = event => {
-    //Add person on form submission
+    //Add person or update existing contact on form submission
     event.preventDefault();
 
     const personObject = {
       name: newName,
-      number: newNumber,
-      id: persons.length + 1
+      number: newNumber
     };
 
     //Check if user already exists
@@ -36,7 +38,6 @@ const App = () => {
       )
     ) {
       //Confirm if we want to replace the old number with a put request
-
       if (
         window.confirm(
           `${personObject.name} is already added to the phone, replace the old number with a new one?`
@@ -57,6 +58,7 @@ const App = () => {
                 person.id !== updatedContact.id ? person : updatedContact
               )
             );
+            displayNotification(`User ${newName}'s phone number is updated`);
           })
           .catch(error => {
             alert(
@@ -70,10 +72,19 @@ const App = () => {
     } else {
       phonebook.create(personObject).then(returnedContact => {
         setPersons(persons.concat(returnedContact));
+        displayNotification(`User ${newName} is added to the phonebook`);
         setNewName("");
         setNewNumber("");
       });
     }
+  };
+
+  const displayNotification = message => {
+    setNotificationMessage(message);
+    setIsNotificationVisible(true);
+    setTimeout(() => {
+      setIsNotificationVisible(false);
+    }, 5000);
   };
 
   const deleteUser = (id, person) => {
@@ -100,6 +111,10 @@ const App = () => {
   return (
     <>
       <h2>Phonebook</h2>
+      <Notification
+        notificationMessage={notificationMessage}
+        isNotificationVisible={isNotificationVisible}
+      ></Notification>
       <Filter value={searchPersons} onChange={handleSearchChange}></Filter>
       <h3> Add a new...</h3>
       <PersonForm
