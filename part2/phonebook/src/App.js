@@ -13,6 +13,7 @@ const App = () => {
   const [searchPersons, setSearchPersons] = useState("");
   const [isNotificationVisible, setIsNotificationVisible] = useState(false);
   const [notificationMessage, setNotificationMessage] = useState("");
+  const [isError, setIsError] = useState(false);
 
   //Get persons from server
   useEffect(() => {
@@ -61,8 +62,9 @@ const App = () => {
             displayNotification(`User ${newName}'s phone number is updated`);
           })
           .catch(error => {
-            alert(
-              `Contact ${existingContact.name}  was already removed from the server`
+            setIsError(true);
+            displayNotification(
+              `Information for ${existingContact.name} was already removed from the server`
             );
             setPersons(
               persons.filter(person => person.id !== updatedContact.id)
@@ -114,6 +116,7 @@ const App = () => {
       <Notification
         notificationMessage={notificationMessage}
         isNotificationVisible={isNotificationVisible}
+        isError={isError}
       ></Notification>
       <Filter value={searchPersons} onChange={handleSearchChange}></Filter>
       <h3> Add a new...</h3>
